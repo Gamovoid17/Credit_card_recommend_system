@@ -81,7 +81,7 @@ def chat(req: ChatIn):
         print("⚠️  LLM error:", e)
         return JSONResponse({"reply": "Sorry, internal error.", "uid": uid})
 
-    # 2. Parse CALL_RECOMMENDER trigger
+    # CALL_RECOMMENDER caller/trigger
     match = re.search(r"CALL_RECOMMENDER\((.*?)\)", reply, re.DOTALL)
     if match:
         try:
