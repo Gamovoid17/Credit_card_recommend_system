@@ -55,13 +55,11 @@ User: {user_input}
 prompt = PromptTemplate(input_variables=["user_input"], template=template)
 chain  = LLMChain(llm=llm, prompt=prompt)
 
-# ───── Request model ─────
 class ChatIn(BaseModel):
     message: str
     uid: Optional[str]     = None   
     user_id: Optional[str] = None   
 
-# ───── Helpers ─────
 def log_message(uid: str, role: str, msg: str):
     conn = get_conn(); cur = conn.cursor()
     cur.execute(
@@ -121,8 +119,8 @@ def chat(req: ChatIn):
             reply = "Based on your inputs, here are your best credit card options:\n" + "\n".join(card_lines)
 
         except Exception as e:
-            print("⚠️ Data processing error:", e)
-            reply = "Sorry, something went wrong while processing your information."
+            print(" Data not proccesed:", e)
+            reply = "something wrong."
 
     # 3. Return response
     return JSONResponse({"reply": reply, "uid": uid})
