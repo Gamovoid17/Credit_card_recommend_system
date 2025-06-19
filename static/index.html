@@ -5,25 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Smart Credit-Card Advisor</title>
 
-  <!-- Google Fonts + Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">             <!-- googel font and icons used and their links-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
-  <!-- Link to static CSS -->
-  <link rel="stylesheet" href="/static/style.css" />
+  <link rel="stylesheet" href="/static/style.css" />    <!-- CSS file-->
 </head>
 <body>
   <div class="chat-wrapper">
 
-    <!-- Header -->
     <header class="chat-header">
       <i class="fa-solid fa-credit-card-front"></i> Smart Credit-Card Advisor
     </header>
-
-    <!-- Chat History -->
     <main id="chatbox" class="chat-box"></main>
-
-    <!-- Chat Input -->
     <form id="chat-form" class="chat-input">
       <input
         type="text"
@@ -43,7 +36,6 @@
     const form      = document.getElementById("chat-form");
     const messageIn = document.getElementById("message");
 
-    // Session UID handling
     let uid = localStorage.getItem("chat_uid");
 
     if (!uid) {
