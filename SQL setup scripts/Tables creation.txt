@@ -1,0 +1,32 @@
+CREATE TABLE IF NOT EXISTS credit_cards (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    card_name VARCHAR(255) NOT NULL,
+    issuer VARCHAR(100) NOT NULL,
+    joining_fee INT DEFAULT 0,
+    annual_fee INT DEFAULT 0,
+    reward_type VARCHAR(100),
+    eligibility_criteria VARCHAR(255),
+    perk VARCHAR(50),
+    apply_link VARCHAR(255),
+    min_credit_score INT,
+    reward_rate FLOAT
+);
+
+CREATE TABLE IF NOT EXISTS user_profiles (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    monthly_income INT,
+    spend_fuel INT,
+    spend_travel INT,
+    spend_groceries INT,
+    spend_dining INT,
+    preferred_benefits VARCHAR(255),
+    credit_score VARCHAR(10)
+);
+
+CREATE TABLE IF NOT EXISTS chat_history (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_id VARCHAR(255),
+    role VARCHAR(50),
+    message TEXT,
+    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+);
