@@ -12,7 +12,7 @@ from scorer import recommend_top_cards
 from db_connector import get_conn
 import json, re, uuid, ast
 
-# ───── FastAPI setup ─────
+# FastAPI setup
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
@@ -24,7 +24,7 @@ def home():
 def new_session():
     return {"uid": str(uuid.uuid4())}
 
-# ───── LangChain setup ─────
+# LangChain setup 
 llm = OllamaLLM(model="mistral")
 memory = ConversationBufferMemory(return_messages=True)
 
@@ -61,19 +61,19 @@ class ChatIn(BaseModel):
     user_id: Optional[str] = None   
 
 def log_message(uid: str, role: str, msg: str):
-    conn = get_conn(); cur = conn.cursor()
+    conn = get_conn(); cur = conn.cursor()                                            #UID generator if doesn't exist
     cur.execute(
         "INSERT INTO chat_history(user_id, role, message) VALUES (%s,%s,%s)",
         (uid, role, msg)
     )
     conn.commit(); conn.close()
 
-# ───── Chat endpoint ─────
+# Chat endpoint 
 @app.post("/chat")
 def chat(req: ChatIn):
     uid = req.uid or req.user_id or str(uuid.uuid4())
 
-    # 1. LLM Chain
+    # LLM Chain
     try:
         raw = chain.invoke({"user_input": req.message})
         reply = raw.get("text", str(raw)).strip()
@@ -122,7 +122,7 @@ def chat(req: ChatIn):
             print(" Data not proccesed:", e)
             reply = "something wrong."
 
-    # 3. Return response
+    # final response being retuned
     return JSONResponse({"reply": reply, "uid": uid})
 
 
