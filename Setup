@@ -1,6 +1,6 @@
 # Setup for the project
 
-Follw the following instruction to setup the projetc on your device
+Follw the following instruction to setup the project on your device
 
 
 # Requirements
@@ -21,12 +21,13 @@ in your command prompt to setup and install the necessary things
 
 # Folder setup
 
-DOwnload the main.py file, Index file and staic file, in the same folder
+Download the main.py file, staic folder, db_connector.py and scorer.py in the same folder
 Open the terminal, in that folder and run the command, 
 
+Run the command
 " uvicorn main:app --reload "
 
-to run and host the program
+to run and host the program using unicorn 
 
 # Running/Hosting
 
