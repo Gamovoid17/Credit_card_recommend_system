@@ -1,7 +1,7 @@
 # Credit_card_recommend_system
 An AI-powered credit card advisor for Indian users, built with FastAPI, LangChain, and Ollama. It chats with users to understand their spending habits and recommends the best credit cards based on income, expenses, perks, and credit score 
 
-# Project structure
+#Project structure
 The project is divided in the following scipts and folders
 
 main.py : The FastAPI server that handles incoming chat messages, processes them using a local LLM (via LangChain), logs interactions, and returns personalized credit card recommendations.
@@ -29,7 +29,7 @@ The FastAPI backend detects the CALL_RECOMMENDER signal, extracts the structured
 4. Card Recommendation Engine
 With the user profile now stored, the backend invokes a custom function called recommend_top_cards() which compares the user's profile against the available credit card data in the credit_cards table. Each card is scored based on how well it matches the user's preferences and spending habits. The cards with the highest relevance scores are then selected and prepared to be sent back to the user as a recommendation.
 
-# Prompt flow
+#Prompt flow
 Ollama) to behave like a smart and helpful credit card advisor for Indian users. The prompt's primary responsibility is to gather key user inputs conversationally and respond with a structured command once all necessary data is collected.
 
 We define the conversational logic using LangChain’s PromptTemplate, which allows us to inject dynamic user input into a static instruction framework.This allows for a far more interactive and user-friendly experience on the front end Here's how the prompt is structured:
@@ -45,7 +45,6 @@ User: {user_input}
 When you have ALL 6 answers, respond EXACTLY with:
 CALL_RECOMMENDER({{"income": ..., "fuel": ..., "travel": ..., "groceries": ..., "dining": ..., "perk": ..., "score": ...}})
 """
-
 
 This template ensures that the LLM always acts within a controlled context. It prompts for missing data if the user hasn't provided all six fields and instructs the model to stop once all required inputs are available.
 
