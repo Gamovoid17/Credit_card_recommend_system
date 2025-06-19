@@ -136,7 +136,7 @@ def chat(req: ChatIn):
             reply = "Parsing error somewhere"
 
 
-# snippet to let the AI print the function as is in chat
+# snippet to let the AI use the function after all information is given by user
 
     if reply.startswith("CALL_RECOMMENDER"):
         display_reply = "Thanks! Based on your inputs, The best credit cards for you are.."
