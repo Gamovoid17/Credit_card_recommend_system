@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Credit-Card Advisor</title>
+
+  <!-- Google Fonts + Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <!-- Link to static CSS -->
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="chat-wrapper">
+
+    <!-- Header -->
+    <header class="chat-header">
+      <i class="fa-solid fa-credit-card-front"></i> Smart Credit-Card Advisor
+    </header>
+
+    <!-- Chat History -->
+    <main id="chatbox" class="chat-box"></main>
+
+    <!-- Chat Input -->
+    <form id="chat-form" class="chat-input">
+      <input
+        type="text"
+        id="message"
+        autocomplete="off"
+        spellcheck="false"
+        placeholder="Ask about cards, rewards, eligibility…"
+      />
+      <button type="submit" title="Send">
+        <i class="fa-solid fa-paper-plane"></i>
+      </button>
+    </form>
+  </div>
+
+  <script>
+    const chatbox   = document.getElementById("chatbox");
+    const form      = document.getElementById("chat-form");
+    const messageIn = document.getElementById("message");
+
+    // Session UID handling
+    let uid = localStorage.getItem("chat_uid");
+
+    if (!uid) {
+      fetch("/new_session")
+        .then(res => res.json())
+        .then(data => {
+          uid = data.uid;
+          localStorage.setItem("chat_uid", uid);
+        });
+    }
+
+    function addMessage(role, text) {
+      const div = document.createElement("div");
+      div.className = `msg ${role}`;
+      div.innerHTML = `<span>${role === "user" ? "You" : "Advisor"}:</span> ${text.replace(/\n/g, "<br>")}`;
+      chatbox.appendChild(div);
+      requestAnimationFrame(() => div.classList.add("show"));
+      chatbox.scrollTop = chatbox.scrollHeight;
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const msg = messageIn.value.trim();
+      if (!msg || !uid) return;
+
+      addMessage("user", msg);
+      messageIn.value = "";
+      messageIn.focus();
+
+      const typing = document.createElement("div");
+      typing.className = "typing bot";
+      typing.innerHTML = `<span class="dots"><span></span><span></span><span></span></span>`;
+      chatbox.appendChild(typing);
+      chatbox.scrollTop = chatbox.scrollHeight;
+
+      try {
+        const res = await fetch("/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: msg, uid: uid })
+        });
+        const data = await res.json();
+        typing.remove();
+        addMessage("bot", data.reply || "Sorry, I didn’t understand that.");
+      } catch (err) {
+        typing.remove();
+        addMessage("bot", "⚠ Error contacting server.");
+        console.error(err);
+      }
+    });
+  </script>
+</body>
+</html>
