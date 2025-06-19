@@ -32,4 +32,3 @@ to run and host the program using unicorn
 # Running/Hosting
 
 The application should open at the IP address: http://localhost:8000/
- 
