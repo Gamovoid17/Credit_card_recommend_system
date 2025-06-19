@@ -4,7 +4,7 @@ import mysql.connector
 from db_connector import get_conn   
 
 
-# ---------- SCORING HELPERS ----------
+# Scoring for credit cards  ----------
 def get_category_match_score(reward_type, spend_categories):
     category_map = { "fuel": 0, "travel": 1, "groceries": 2, "dining": 3 }
     idx = category_map.get(reward_type.lower())
@@ -35,7 +35,7 @@ def score_card(user, card):
             return 0
 
 
-    # -------- soft scoring --------
+    # soft scoring --------
     score = 0
     if user['preferred_benefits'].lower() == card['perk'].lower():
         score += 30
