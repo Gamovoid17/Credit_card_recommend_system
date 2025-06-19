@@ -50,9 +50,9 @@ This template ensures that the LLM always acts within a controlled context. It p
 
 # Flow of Execution
 
-1.User Initiates Chat
-2.The user sends an input like "Hi, I'm looking for a good credit card." This input is passed into the PromptTemplate and processed by the LLMChain.
+1. User Initiates Chat
+2. The user sends an input like "Hi, I'm looking for a good credit card." This input is passed into the PromptTemplate and processed by the LLMChain.
 LLM Asks for Missing Info
-3.LangChain’s ConversationBufferMemory helps preserve the sequence of user inputs and model responses across turns so that the LLM doesn't forget past information during the dialogue.(The responses are stored in the chat_history table in sql(a better method to store should be used))
-4.Once the model has gathered all required details, it responds strictly with a CALL_RECOMMENDER({...}) statement. This triggers the function and prints out the top recommendaations from the database of credits cards(currently contains 20)
+3. LangChain’s ConversationBufferMemory helps preserve the sequence of user inputs and model responses across turns so that the LLM doesn't forget past information during the dialogue.(The responses are stored in the chat_history table in sql(a better method to store should be used)) 
+4. Once the model has gathered all required details, it responds strictly with a CALL_RECOMMENDER({...}) statement. This triggers the function and prints out the top recommendaations from the database of credits cards(currently contains 20)
 
