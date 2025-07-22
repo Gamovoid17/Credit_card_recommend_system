@@ -9,7 +9,7 @@ scorer.py ; Contains logic for ranking and recommending credit cards based on us
 db_utils.py : Provides utility functions (e.g., get_conn()) to connect and interact with the backend MySQL database.
 schema.sql : SQL script to create necessary tables such as user_profiles and chat_history in the MySQL database.
 style.css : Basic styling for the frontend chat interface.
-index.html : The main UI for the credit card advisor chatbot, allowing users to interact via chat in a browser.
+index.html : The main UI for the credit card advisor chatbot, allowing users to interact via chat in a browser .
 
 # Database tables
 user_profiles:Stores user-specific information required for card recommendations. (monthly_income, spend_fuel, spend_travel, spend_groceries, spend_dining,preferred_benefits (cashback, travel points, or lounge access),credit_score)
